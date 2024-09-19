@@ -69,7 +69,20 @@ void clearALLclock(){
 	  HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_RESET);
 
 }
-
+void setNumberOnClock(int num){
+	  if(num == 0) HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
+	  if(num == 1) HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
+	  if(num == 2) HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
+	  if(num == 3) HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
+	  if(num == 4) HAL_GPIO_WritePin(led5_GPIO_Port, led5_Pin, GPIO_PIN_SET);
+	  if(num == 5) HAL_GPIO_WritePin(led6_GPIO_Port, led6_Pin, GPIO_PIN_SET);
+	  if(num == 6) HAL_GPIO_WritePin(led7_GPIO_Port, led7_Pin, GPIO_PIN_SET);
+	  if(num == 7) HAL_GPIO_WritePin(led8_GPIO_Port, led8_Pin, GPIO_PIN_SET);
+	  if(num == 8) HAL_GPIO_WritePin(led9_GPIO_Port, led9_Pin, GPIO_PIN_SET);
+	  if(num == 9) HAL_GPIO_WritePin(led10_GPIO_Port, led10_Pin, GPIO_PIN_SET);
+	  if(num == 10) HAL_GPIO_WritePin(led11_GPIO_Port, led11_Pin, GPIO_PIN_SET);
+	  if(num == 11) HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_SET);
+}
 
 /* USER CODE END 0 */
 
@@ -111,28 +124,15 @@ int count = 0;
     while (1)
     {
     /* USER CODE END WHILE */
-    	if(count == 0) HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
-    		 	  if(count == 1) HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
-    		 	  if(count == 2) HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
-    		 	  if(count == 3) HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
-    		 	  if(count == 4) HAL_GPIO_WritePin(led5_GPIO_Port, led5_Pin, GPIO_PIN_SET);
-    		 	  if(count == 5) HAL_GPIO_WritePin(led6_GPIO_Port, led6_Pin, GPIO_PIN_SET);
-    		 	  if(count == 6) HAL_GPIO_WritePin(led7_GPIO_Port, led7_Pin, GPIO_PIN_SET);
-    		 	  if(count == 7) HAL_GPIO_WritePin(led8_GPIO_Port, led8_Pin, GPIO_PIN_SET);
-    		 	  if(count == 8) HAL_GPIO_WritePin(led9_GPIO_Port, led9_Pin, GPIO_PIN_SET);
-    		 	  if(count == 9) HAL_GPIO_WritePin(led10_GPIO_Port, led10_Pin, GPIO_PIN_SET);
-    		 	  if(count == 10) HAL_GPIO_WritePin(led11_GPIO_Port, led11_Pin, GPIO_PIN_SET);
-    		 	  if(count == 11) HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_SET);
-
-    		 	  if(count == 12)// turn off all led
-    		 	  {
-    		 		  clearALLclock();
-    		 		  count = 0;
-    		 	  }
-
-    		 	  count ++; // update count
+    	  setNumberOnClock(count);
+    	if(count == 12) {
+    		clearALLclock();
+    		count = -1;
+    	}
+    	 count ++;
 
     		 	  HAL_Delay(500);
+
 
 
     /* USER CODE BEGIN 3 */
