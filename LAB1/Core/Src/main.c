@@ -86,8 +86,9 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-   HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+  HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
+     HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+     HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
    int count=0;
     /* USER CODE END 2 */
 
@@ -97,15 +98,21 @@ int main(void)
     while (1)
     {
       /* USER CODE END WHILE */
-    	if(count == 2){
-    		 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
-    		 		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
-    		 	count=0;
-
-    		 }
-    		 	  count+=1;
-    		 	  HAL_Delay(1000);
-
+    	 if(count == 3){
+    	   		  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+    	   		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
+    	   }
+    	   	  if(count == 5){
+    	   		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
+    	   		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+    	   	  }
+    	   	  if(count == 10){
+    	   		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+    	   		  HAL_GPIO_TogglePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin);
+    	   		  count=0;
+    	   	  }
+    	   	  count+=1;
+    	   	  HAL_Delay(1000);
       /* USER CODE BEGIN 3 */
     }
   /* USER CODE END 3 */
