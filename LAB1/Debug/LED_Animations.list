@@ -39,11 +39,11 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  17 .debug_line   00004b43  00000000  00000000  00039cfc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079c39  00000000  00000000  0003e83f  2**0
+ 18 .debug_str    00079c27  00000000  00000000  0003e83f  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b8478  2**0
+ 19 .comment      00000053  00000000  00000000  000b8466  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d94  00000000  00000000  000b84cc  2**2
+ 20 .debug_frame  00000d94  00000000  00000000  000b84bc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -334,13 +334,13 @@ int main(void)
 
 
   /* USER CODE END 2 */
-  int count_second = 0;
+  int second = 0;
  8000326:	2300      	movs	r3, #0
  8000328:	60fb      	str	r3, [r7, #12]
-    int count_minute = 0;
+    int minute = 0;
  800032a:	2300      	movs	r3, #0
  800032c:	60bb      	str	r3, [r7, #8]
-    int count_hour = 0;
+    int hour = 0;
  800032e:	2300      	movs	r3, #0
  8000330:	607b      	str	r3, [r7, #4]
       /* USER CODE END WHILE */
@@ -348,13 +348,13 @@ int main(void)
       /* USER CODE BEGIN 3 */
 
   	  //---------- hien thuc kim giay-----------
-  	  if(count_second == 60)// kim giay chay du 5 vong
+  	  if(second == 60)// kim giay chay du 5 vong
  8000332:	68fb      	ldr	r3, [r7, #12]
  8000334:	2b3c      	cmp	r3, #60	; 0x3c
  8000336:	d12b      	bne.n	8000390 <main+0x7c>
   	  {
   		  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  		  if((count_second/5 - 1) != (count_minute/5) && (count_second/5 - 1) != count_hour)
+  		  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
  8000338:	68fb      	ldr	r3, [r7, #12]
  800033a:	4a80      	ldr	r2, [pc, #512]	; (800053c <main+0x228>)
  800033c:	fb82 1203 	smull	r1, r2, r2, r3
@@ -382,7 +382,7 @@ int main(void)
  800036e:	d00a      	beq.n	8000386 <main+0x72>
   		  {
   			  //xoa kim giay, tao hieu ung chuyen dong
-  			  clearNumberOnClock(count_second/5 - 1);
+  			  clearNumberOnClock(second/5 - 1);
  8000370:	68fb      	ldr	r3, [r7, #12]
  8000372:	4a72      	ldr	r2, [pc, #456]	; (800053c <main+0x228>)
  8000374:	fb82 1203 	smull	r1, r2, r2, r3
@@ -393,17 +393,17 @@ int main(void)
  8000380:	4618      	mov	r0, r3
  8000382:	f7ff ff55 	bl	8000230 <clearNumberOnClock>
   		  }
-  		  count_minute ++;// cap nhat minute
+  		  minute ++;// cap nhat minute
  8000386:	68bb      	ldr	r3, [r7, #8]
  8000388:	3301      	adds	r3, #1
  800038a:	60bb      	str	r3, [r7, #8]
-  		  count_second = 0;// reset second ve 0
+  		  second = 0;// reset second ve 0
  800038c:	2300      	movs	r3, #0
  800038e:	60fb      	str	r3, [r7, #12]
   	  }
 
   	  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  	  if((count_second/5 - 1) != (count_minute/5) && (count_second/5 - 1) != count_hour)
+  	  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
  8000390:	68fb      	ldr	r3, [r7, #12]
  8000392:	4a6a      	ldr	r2, [pc, #424]	; (800053c <main+0x228>)
  8000394:	fb82 1203 	smull	r1, r2, r2, r3
@@ -430,7 +430,7 @@ int main(void)
  80003c4:	429a      	cmp	r2, r3
  80003c6:	d00a      	beq.n	80003de <main+0xca>
   	  {
-  		  clearNumberOnClock(count_second/5 - 1);
+  		  clearNumberOnClock(second/5 - 1);
  80003c8:	68fb      	ldr	r3, [r7, #12]
  80003ca:	4a5c      	ldr	r2, [pc, #368]	; (800053c <main+0x228>)
  80003cc:	fb82 1203 	smull	r1, r2, r2, r3
@@ -442,7 +442,7 @@ int main(void)
  80003da:	f7ff ff29 	bl	8000230 <clearNumberOnClock>
   	  }
   	  // hien thi kim giay
-  	  setNumberOnClock(count_second/5);
+  	  setNumberOnClock(second/5);
  80003de:	68fb      	ldr	r3, [r7, #12]
  80003e0:	4a56      	ldr	r2, [pc, #344]	; (800053c <main+0x228>)
  80003e2:	fb82 1203 	smull	r1, r2, r2, r3
@@ -451,19 +451,19 @@ int main(void)
  80003ea:	1ad3      	subs	r3, r2, r3
  80003ec:	4618      	mov	r0, r3
  80003ee:	f7ff fead 	bl	800014c <setNumberOnClock>
-  	  count_second ++;
+  	  second ++;
  80003f2:	68fb      	ldr	r3, [r7, #12]
  80003f4:	3301      	adds	r3, #1
  80003f6:	60fb      	str	r3, [r7, #12]
 
   	  //--------- hien thuc kim phut----------
-  	  if(count_minute == 60)//kim phut chay du 1 vong
+  	  if(minute == 60)//kim phut chay du 1 vong
  80003f8:	68bb      	ldr	r3, [r7, #8]
  80003fa:	2b3c      	cmp	r3, #60	; 0x3c
  80003fc:	d12b      	bne.n	8000456 <main+0x142>
   	  {
   		  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  		  if((count_minute/5 -1) != (count_second/5) && (count_minute/5 -1) != count_hour)
+  		  if((minute/5 -1) != (second/5) && (minute/5 -1) != hour)
  80003fe:	68bb      	ldr	r3, [r7, #8]
  8000400:	4a4e      	ldr	r2, [pc, #312]	; (800053c <main+0x228>)
  8000402:	fb82 1203 	smull	r1, r2, r2, r3
@@ -491,7 +491,7 @@ int main(void)
  8000434:	d00a      	beq.n	800044c <main+0x138>
   		  {
   			  //xoa kim phut, tao hieu ung chuyen dong
-  			  clearNumberOnClock(count_minute/5 -1);
+  			  clearNumberOnClock(minute/5 -1);
  8000436:	68bb      	ldr	r3, [r7, #8]
  8000438:	4a40      	ldr	r2, [pc, #256]	; (800053c <main+0x228>)
  800043a:	fb82 1203 	smull	r1, r2, r2, r3
@@ -502,17 +502,17 @@ int main(void)
  8000446:	4618      	mov	r0, r3
  8000448:	f7ff fef2 	bl	8000230 <clearNumberOnClock>
   		  }
-  		  count_hour ++;// cap nhat kim gio
+  		  hour ++;// cap nhat kim gio
  800044c:	687b      	ldr	r3, [r7, #4]
  800044e:	3301      	adds	r3, #1
  8000450:	607b      	str	r3, [r7, #4]
-  		  count_minute = 0;// reset kim phut ve 0
+  		  minute = 0;// reset kim phut ve 0
  8000452:	2300      	movs	r3, #0
  8000454:	60bb      	str	r3, [r7, #8]
   	  }
 
   	  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  	  if((count_minute/5 -1) != (count_second/5) && (count_minute/5 -1) != count_hour)
+  	  if((minute/5 -1) != (second/5) && (minute/5 -1) != hour)
  8000456:	68bb      	ldr	r3, [r7, #8]
  8000458:	4a38      	ldr	r2, [pc, #224]	; (800053c <main+0x228>)
  800045a:	fb82 1203 	smull	r1, r2, r2, r3
@@ -540,7 +540,7 @@ int main(void)
  800048c:	d00a      	beq.n	80004a4 <main+0x190>
   	  {
   		  //xoa kim phut, tao hieu ung chuyen dong
-  		  clearNumberOnClock(count_minute/5 -1);
+  		  clearNumberOnClock(minute/5 -1);
  800048e:	68bb      	ldr	r3, [r7, #8]
  8000490:	4a2a      	ldr	r2, [pc, #168]	; (800053c <main+0x228>)
  8000492:	fb82 1203 	smull	r1, r2, r2, r3
@@ -552,7 +552,7 @@ int main(void)
  80004a0:	f7ff fec6 	bl	8000230 <clearNumberOnClock>
   	  }
   	  // hien thi kim phut
-  	  setNumberOnClock(count_minute/5);
+  	  setNumberOnClock(minute/5);
  80004a4:	68bb      	ldr	r3, [r7, #8]
  80004a6:	4a25      	ldr	r2, [pc, #148]	; (800053c <main+0x228>)
  80004a8:	fb82 1203 	smull	r1, r2, r2, r3
@@ -563,13 +563,13 @@ int main(void)
  80004b4:	f7ff fe4a 	bl	800014c <setNumberOnClock>
 
   	  // ------------hien thuc kim gio------------
-  	  if(count_hour == 12)// kim gio quay duoc 1 vong
+  	  if(hour == 12)// kim gio quay duoc 1 vong
  80004b8:	687b      	ldr	r3, [r7, #4]
  80004ba:	2b0c      	cmp	r3, #12
  80004bc:	d11c      	bne.n	80004f8 <main+0x1e4>
   	  {
   		  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  		  if((count_hour -1) != (count_minute/5) && (count_hour -1) != (count_second/5))
+  		  if((hour -1) != (minute/5) && (hour -1) != (second/5))
  80004be:	687b      	ldr	r3, [r7, #4]
  80004c0:	1e5a      	subs	r2, r3, #1
  80004c2:	68bb      	ldr	r3, [r7, #8]
@@ -592,18 +592,18 @@ int main(void)
  80004e8:	d004      	beq.n	80004f4 <main+0x1e0>
   		  {
   			  //xoa kim gio, tao hieu ung chuyen dong
-  			  clearNumberOnClock(count_hour -1);
+  			  clearNumberOnClock(hour -1);
  80004ea:	687b      	ldr	r3, [r7, #4]
  80004ec:	3b01      	subs	r3, #1
  80004ee:	4618      	mov	r0, r3
  80004f0:	f7ff fe9e 	bl	8000230 <clearNumberOnClock>
   		  }
-  		  count_hour = 0;// reset kim phut ve 0
+  		  hour = 0;// reset kim phut ve 0
  80004f4:	2300      	movs	r3, #0
  80004f6:	607b      	str	r3, [r7, #4]
   	  }
   	  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  	  if((count_hour -1) != (count_minute/5) && (count_hour -1) != (count_second/5))
+  	  if((hour -1) != (minute/5) && (hour -1) != (second/5))
  80004f8:	687b      	ldr	r3, [r7, #4]
  80004fa:	1e5a      	subs	r2, r3, #1
  80004fc:	68bb      	ldr	r3, [r7, #8]
@@ -626,21 +626,21 @@ int main(void)
  8000522:	d004      	beq.n	800052e <main+0x21a>
   	  {
   		  //xoa kim gio, tao hieu ung chuyen dong
-  		  clearNumberOnClock(count_hour -1);
+  		  clearNumberOnClock(hour -1);
  8000524:	687b      	ldr	r3, [r7, #4]
  8000526:	3b01      	subs	r3, #1
  8000528:	4618      	mov	r0, r3
  800052a:	f7ff fe81 	bl	8000230 <clearNumberOnClock>
   	  }
   	  // hien thi kim gio
-  	  setNumberOnClock(count_hour);
+  	  setNumberOnClock(hour);
  800052e:	6878      	ldr	r0, [r7, #4]
  8000530:	f7ff fe0c 	bl	800014c <setNumberOnClock>
 
   	  HAL_Delay(50);
  8000534:	2032      	movs	r0, #50	; 0x32
  8000536:	f000 f983 	bl	8000840 <HAL_Delay>
-  	  if(count_second == 60)// kim giay chay du 5 vong
+  	  if(second == 60)// kim giay chay du 5 vong
  800053a:	e6fa      	b.n	8000332 <main+0x1e>
  800053c:	66666667 	.word	0x66666667
 
