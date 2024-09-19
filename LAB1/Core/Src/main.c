@@ -143,7 +143,7 @@ int main(void)
       /* USER CODE BEGIN 3 */
 
   	  //---------- hien thuc kim giay-----------
-  	  if(second == 60)// kim giay chay du 5 vong
+  	  if(second == 60)// kim giay chay du 1 vong
   	  {
   		  // kiem tra dieu kien kim gio, phut, giay trung nhau
   		  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
