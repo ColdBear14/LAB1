@@ -70,32 +70,32 @@ void clearALLclock(){
 
 }
 void setNumberOnClock(int num){
-	  if(num == 0) HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
-	  if(num == 1) HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
-	  if(num == 2) HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
-	  if(num == 3) HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
-	  if(num == 4) HAL_GPIO_WritePin(led5_GPIO_Port, led5_Pin, GPIO_PIN_SET);
-	  if(num == 5) HAL_GPIO_WritePin(led6_GPIO_Port, led6_Pin, GPIO_PIN_SET);
-	  if(num == 6) HAL_GPIO_WritePin(led7_GPIO_Port, led7_Pin, GPIO_PIN_SET);
-	  if(num == 7) HAL_GPIO_WritePin(led8_GPIO_Port, led8_Pin, GPIO_PIN_SET);
-	  if(num == 8) HAL_GPIO_WritePin(led9_GPIO_Port, led9_Pin, GPIO_PIN_SET);
-	  if(num == 9) HAL_GPIO_WritePin(led10_GPIO_Port, led10_Pin, GPIO_PIN_SET);
-	  if(num == 10) HAL_GPIO_WritePin(led11_GPIO_Port, led11_Pin, GPIO_PIN_SET);
-	  if(num == 11) HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_SET);
+	  if(num == 1) HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_SET);
+	  if(num == 2) HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_SET);
+	  if(num == 3) HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_SET);
+	  if(num == 4) HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_SET);
+	  if(num == 5) HAL_GPIO_WritePin(led5_GPIO_Port, led5_Pin, GPIO_PIN_SET);
+	  if(num == 6) HAL_GPIO_WritePin(led6_GPIO_Port, led6_Pin, GPIO_PIN_SET);
+	  if(num == 7) HAL_GPIO_WritePin(led7_GPIO_Port, led7_Pin, GPIO_PIN_SET);
+	  if(num == 8) HAL_GPIO_WritePin(led8_GPIO_Port, led8_Pin, GPIO_PIN_SET);
+	  if(num == 9) HAL_GPIO_WritePin(led9_GPIO_Port, led9_Pin, GPIO_PIN_SET);
+	  if(num == 10) HAL_GPIO_WritePin(led10_GPIO_Port, led10_Pin, GPIO_PIN_SET);
+	  if(num == 11) HAL_GPIO_WritePin(led11_GPIO_Port, led11_Pin, GPIO_PIN_SET);
+	  if(num == 0) HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_SET);
 }
 void  clearNumberOnClock(int num){
-	  if(num == 0) HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
-	  if(num == 1) HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
-	  if(num == 2) HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
-	  if(num == 3) HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
-	  if(num == 4) HAL_GPIO_WritePin(led5_GPIO_Port, led5_Pin, GPIO_PIN_RESET);
-	  if(num == 5) HAL_GPIO_WritePin(led6_GPIO_Port, led6_Pin, GPIO_PIN_RESET);
-	  if(num == 6) HAL_GPIO_WritePin(led7_GPIO_Port, led7_Pin, GPIO_PIN_RESET);
-	  if(num == 7) HAL_GPIO_WritePin(led8_GPIO_Port, led8_Pin, GPIO_PIN_RESET);
-	  if(num == 8) HAL_GPIO_WritePin(led9_GPIO_Port, led9_Pin, GPIO_PIN_RESET);
-	  if(num == 9) HAL_GPIO_WritePin(led10_GPIO_Port, led10_Pin, GPIO_PIN_RESET);
-	  if(num == 10) HAL_GPIO_WritePin(led11_GPIO_Port, led11_Pin, GPIO_PIN_RESET);
-	  if(num == 11) HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_RESET);
+	  if(num == 1) HAL_GPIO_WritePin(led1_GPIO_Port, led1_Pin, GPIO_PIN_RESET);
+	  if(num == 2) HAL_GPIO_WritePin(led2_GPIO_Port, led2_Pin, GPIO_PIN_RESET);
+	  if(num == 3) HAL_GPIO_WritePin(led3_GPIO_Port, led3_Pin, GPIO_PIN_RESET);
+	  if(num == 4) HAL_GPIO_WritePin(led4_GPIO_Port, led4_Pin, GPIO_PIN_RESET);
+	  if(num == 5) HAL_GPIO_WritePin(led5_GPIO_Port, led5_Pin, GPIO_PIN_RESET);
+	  if(num == 6) HAL_GPIO_WritePin(led6_GPIO_Port, led6_Pin, GPIO_PIN_RESET);
+	  if(num == 7) HAL_GPIO_WritePin(led7_GPIO_Port, led7_Pin, GPIO_PIN_RESET);
+	  if(num == 8) HAL_GPIO_WritePin(led8_GPIO_Port, led8_Pin, GPIO_PIN_RESET);
+	  if(num == 9) HAL_GPIO_WritePin(led9_GPIO_Port, led9_Pin, GPIO_PIN_RESET);
+	  if(num == 10) HAL_GPIO_WritePin(led10_GPIO_Port, led10_Pin, GPIO_PIN_RESET);
+	  if(num == 11) HAL_GPIO_WritePin(led11_GPIO_Port, led11_Pin, GPIO_PIN_RESET);
+	  if(num == 0) HAL_GPIO_WritePin(led12_GPIO_Port, led12_Pin, GPIO_PIN_RESET);
 }
 
 /* USER CODE END 0 */
@@ -141,76 +141,35 @@ int main(void)
       /* USER CODE END WHILE */
 
       /* USER CODE BEGIN 3 */
-
-  	  //---------- hien thuc kim giay-----------
-  	  if(second == 60)// kim giay chay du 1 vong
+    clearALLclock();
+  	  if(second == 60)
   	  {
-  		  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  		  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
-  		  {
-  			  //xoa kim giay, tao hieu ung chuyen dong
-  			  clearNumberOnClock(second/5 - 1);
-  		  }
-  		  minute ++;// cap nhat minute
-  		  second = 0;// reset second ve 0
+  		  minute ++;
+  		  second = 0;
   	  }
 
-  	  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  	  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
-  	  {
-  		  clearNumberOnClock(second/5 - 1);
-  	  }
-  	  // hien thi kim giay
   	  setNumberOnClock(second/5);
-  	  second ++;
+  	  second++;
 
-  	  //--------- hien thuc kim phut----------
-  	  if(minute == 60)//kim phut chay du 1 vong
+  	  if(minute == 60)
   	  {
-  		  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  		  if((minute/5 -1) != (second/5) && (minute/5 -1) != hour)
-  		  {
-  			  //xoa kim phut, tao hieu ung chuyen dong
-  			  clearNumberOnClock(minute/5 -1);
-  		  }
-  		  hour ++;// cap nhat kim gio
-  		  minute = 0;// reset kim phut ve 0
+  		  hour ++;
+  		  minute = 0;
   	  }
 
-  	  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  	  if((minute/5 -1) != (second/5) && (minute/5 -1) != hour)
-  	  {
-  		  //xoa kim phut, tao hieu ung chuyen dong
-  		  clearNumberOnClock(minute/5 -1);
-  	  }
-  	  // hien thi kim phut
   	  setNumberOnClock(minute/5);
 
-  	  // ------------hien thuc kim gio------------
-  	  if(hour == 12)// kim gio quay duoc 1 vong
+
+  	  if(hour == 12)
   	  {
-  		  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  		  if((hour -1) != (minute/5) && (hour -1) != (second/5))
-  		  {
-  			  //xoa kim gio, tao hieu ung chuyen dong
-  			  clearNumberOnClock(hour -1);
-  		  }
-  		  hour = 0;// reset kim phut ve 0
+  		  hour = 0;
   	  }
-  	  // kiem tra dieu kien kim gio, phut, giay trung nhau
-  	  if((hour -1) != (minute/5) && (hour -1) != (second/5))
-  	  {
-  		  //xoa kim gio, tao hieu ung chuyen dong
-  		  clearNumberOnClock(hour -1);
-  	  }
-  	  // hien thi kim gio
   	  setNumberOnClock(hour);
 
-  	  HAL_Delay(50);
-    }
+  	  HAL_Delay(20);
   /* USER CODE END 3 */
 }
-
+}
 /**
   * @brief System Clock Configuration
   * @retval None
