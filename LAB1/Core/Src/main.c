@@ -132,24 +132,81 @@ int main(void)
 
 
   /* USER CODE END 2 */
-int count = 0;
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+  int count_second = 0;
+    int count_minute = 0;
+    int count_hour = 0;
+
     while (1)
     {
-    /* USER CODE END WHILE */
- 		  setNumberOnClock(count);
+      /* USER CODE END WHILE */
 
- 		  clearNumberOnClock(count-1);
- 		  if(count == 12 ) count =-1;
+      /* USER CODE BEGIN 3 */
 
-    	 count ++;
+  	  //---------- hien thuc kim giay-----------
+  	  if(count_second == 60)// kim giay chay du 5 vong
+  	  {
+  		  // kiem tra dieu kien kim gio, phut, giay trung nhau
+  		  if((count_second/5 - 1) != (count_minute/5) && (count_second/5 - 1) != count_hour)
+  		  {
+  			  //xoa kim giay, tao hieu ung chuyen dong
+  			  clearNumberOnClock(count_second/5 - 1);
+  		  }
+  		  count_minute ++;// cap nhat minute
+  		  count_second = 0;// reset second ve 0
+  	  }
 
-    		 	  HAL_Delay(500);
+  	  // kiem tra dieu kien kim gio, phut, giay trung nhau
+  	  if((count_second/5 - 1) != (count_minute/5) && (count_second/5 - 1) != count_hour)
+  	  {
+  		  clearNumberOnClock(count_second/5 - 1);
+  	  }
+  	  // hien thi kim giay
+  	  setNumberOnClock(count_second/5);
+  	  count_second ++;
 
+  	  //--------- hien thuc kim phut----------
+  	  if(count_minute == 60)//kim phut chay du 1 vong
+  	  {
+  		  // kiem tra dieu kien kim gio, phut, giay trung nhau
+  		  if((count_minute/5 -1) != (count_second/5) && (count_minute/5 -1) != count_hour)
+  		  {
+  			  //xoa kim phut, tao hieu ung chuyen dong
+  			  clearNumberOnClock(count_minute/5 -1);
+  		  }
+  		  count_hour ++;// cap nhat kim gio
+  		  count_minute = 0;// reset kim phut ve 0
+  	  }
 
+  	  // kiem tra dieu kien kim gio, phut, giay trung nhau
+  	  if((count_minute/5 -1) != (count_second/5) && (count_minute/5 -1) != count_hour)
+  	  {
+  		  //xoa kim phut, tao hieu ung chuyen dong
+  		  clearNumberOnClock(count_minute/5 -1);
+  	  }
+  	  // hien thi kim phut
+  	  setNumberOnClock(count_minute/5);
 
-    /* USER CODE BEGIN 3 */
+  	  // ------------hien thuc kim gio------------
+  	  if(count_hour == 12)// kim gio quay duoc 1 vong
+  	  {
+  		  // kiem tra dieu kien kim gio, phut, giay trung nhau
+  		  if((count_hour -1) != (count_minute/5) && (count_hour -1) != (count_second/5))
+  		  {
+  			  //xoa kim gio, tao hieu ung chuyen dong
+  			  clearNumberOnClock(count_hour -1);
+  		  }
+  		  count_hour = 0;// reset kim phut ve 0
+  	  }
+  	  // kiem tra dieu kien kim gio, phut, giay trung nhau
+  	  if((count_hour -1) != (count_minute/5) && (count_hour -1) != (count_second/5))
+  	  {
+  		  //xoa kim gio, tao hieu ung chuyen dong
+  		  clearNumberOnClock(count_hour -1);
+  	  }
+  	  // hien thi kim gio
+  	  setNumberOnClock(count_hour);
+
+  	  HAL_Delay(50);
     }
   /* USER CODE END 3 */
 }
