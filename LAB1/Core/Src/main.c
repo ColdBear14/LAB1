@@ -141,32 +141,61 @@ int main(void)
       /* USER CODE END WHILE */
 
       /* USER CODE BEGIN 3 */
-    clearALLclock();
+    //clearALLclock();
+
   	  if(second == 60)
   	  {
+  		  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
+  		  {
+  			  //xoa kim giay
+  			  clearNumberOnClock(second/5 - 1);
+  		  }
   		  minute ++;
   		  second = 0;
   	  }
-
+		  if((second/5 - 1) != (minute/5) && (second/5 - 1) != hour)
+		  {
+			  //xoa kim giay
+			  clearNumberOnClock(second/5 - 1);
+		  }
   	  setNumberOnClock(second/5);
   	  second++;
 
   	  if(minute == 60)
   	  {
+  	  	  if((minute/5 - 1) != (second/5) && (minute/5 - 1) != hour)
+  	  	  {
+  	  		  // xoa kim phut
+  	  		  clearNumberOnClock(minute/5 - 1);
+  	  	  }
   		  hour ++;
   		  minute = 0;
   	  }
-
+  	  if((minute/5 - 1) != (second/5) && (minute/5 - 1) != hour)
+  	  {
+  		  clearNumberOnClock(minute/5 - 1);
+  	  }
   	  setNumberOnClock(minute/5);
 
 
   	  if(hour == 12)
   	  {
+  		  if((hour -1) != (minute/5) && (hour -1) != (second/5))
+  		  {
+  			  //xoa kim gio
+  			  clearNumberOnClock(hour -1);
+  		  }
   		  hour = 0;
+  	  }
+  	  if((hour -1) != (minute/5) && (hour -1) != (second/5))
+  	  {
+  		  //xoa kim gio
+  		  clearNumberOnClock(hour -1);
   	  }
   	  setNumberOnClock(hour);
 
-  	  HAL_Delay(20);
+  	  HAL_Delay(200);
+
   /* USER CODE END 3 */
 }
 }
