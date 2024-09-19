@@ -108,50 +108,49 @@ int main(void)
   MX_GPIO_Init();
  800015a:	f000 f85f 	bl	800021c <MX_GPIO_Init>
   /* USER CODE BEGIN 2 */
-
   HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
  800015e:	2200      	movs	r2, #0
  8000160:	2120      	movs	r1, #32
  8000162:	480f      	ldr	r0, [pc, #60]	; (80001a0 <main+0x54>)
  8000164:	f000 fbfc 	bl	8000960 <HAL_GPIO_WritePin>
-     HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
+   HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
  8000168:	2201      	movs	r2, #1
  800016a:	2140      	movs	r1, #64	; 0x40
  800016c:	480c      	ldr	r0, [pc, #48]	; (80001a0 <main+0x54>)
  800016e:	f000 fbf7 	bl	8000960 <HAL_GPIO_WritePin>
-     int count=0;
+   int count=0;
  8000172:	2300      	movs	r3, #0
  8000174:	607b      	str	r3, [r7, #4]
-    /* Infinite loop */
     /* USER CODE BEGIN WHILE */
+
     while (1)
     {
       /* USER CODE END WHILE */
-  	  if(count == 2){
+    	if(count == 2){
  8000176:	687b      	ldr	r3, [r7, #4]
  8000178:	2b02      	cmp	r3, #2
  800017a:	d109      	bne.n	8000190 <main+0x44>
-  	 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+    		 		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
  800017c:	2120      	movs	r1, #32
  800017e:	4808      	ldr	r0, [pc, #32]	; (80001a0 <main+0x54>)
  8000180:	f000 fc06 	bl	8000990 <HAL_GPIO_TogglePin>
-  	 		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
+    		 		  HAL_GPIO_TogglePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin);
  8000184:	2140      	movs	r1, #64	; 0x40
  8000186:	4806      	ldr	r0, [pc, #24]	; (80001a0 <main+0x54>)
  8000188:	f000 fc02 	bl	8000990 <HAL_GPIO_TogglePin>
-  	 	count=0;
+    		 	count=0;
  800018c:	2300      	movs	r3, #0
  800018e:	607b      	str	r3, [r7, #4]
 
-  	 }
-  	 	  count+=1;
+    		 }
+    		 	  count+=1;
  8000190:	687b      	ldr	r3, [r7, #4]
  8000192:	3301      	adds	r3, #1
  8000194:	607b      	str	r3, [r7, #4]
-  	 	  HAL_Delay(1000);
+    		 	  HAL_Delay(1000);
  8000196:	f44f 707a 	mov.w	r0, #1000	; 0x3e8
  800019a:	f000 f95f 	bl	800045c <HAL_Delay>
-  	  if(count == 2){
+    	if(count == 2){
  800019e:	e7ea      	b.n	8000176 <main+0x2a>
  80001a0:	40010800 	.word	0x40010800
 
