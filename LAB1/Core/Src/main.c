@@ -197,7 +197,7 @@ int main(void) {
 
 	int Green1_count = 3;
 	int Yellow1_count = 2;
-	int Red1_count = 4;
+	int Red1_count = 5;
 
 
 	int Green1_Status = 1;
@@ -206,7 +206,7 @@ int main(void) {
 
 
 	int Green2_count = 3;
-	int Yellow2_count = 1;
+	int Yellow2_count = 2;
 	int Red2_count = 5;
 
 
@@ -222,6 +222,7 @@ int main(void) {
 		if (Green1_Status == 1) {
 			display7SEG_groupA(Green1_count);
 			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
+			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
 
 			if (Green1_count == 0) {
 				Green1_Status = 0; // green-led turn off
@@ -248,13 +249,13 @@ int main(void) {
 
 		// red-led will turn on in 5 seconds until red-status=0
 		if (Red1_Status == 1) {
-			display7SEG_groupA(Red1_count + 1);
+			display7SEG_groupA(Red1_count);
 			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
 
 			if (Red1_count == 0) {
 				Red1_Status = 0; // red-led turn off
-				HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
-				Red1_count = 5; // update time of red-led
+
+				Red1_count = 6; // update time of red-led
 				Green1_Status = 1; // green-led turn on
 			}
 			Red1_count--;
@@ -263,6 +264,7 @@ int main(void) {
 		if (Red2_Status == 1) {
 			display7SEG_groupB(Red2_count);
 			HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, SET);
+			HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, RESET);
 
 			if (Red2_count == 0) {
 				Red2_Status = 0; // red-led turn off
@@ -289,17 +291,17 @@ int main(void) {
 
 		//yellow-led will turn on in 3 seconds until yellow-status=0
 		if (Yellow2_Status == 1) {
-			display7SEG_groupB(Yellow2_count + 1);
+			display7SEG_groupB(Yellow2_count );
 			HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, SET);
 
 			if (Yellow2_count == 0) {
 				Yellow2_Status = 0; // yellow-led turn off
-				HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, RESET);
-				Yellow2_count = 2; // update time of yellow-led
+				Yellow2_count = 3; // update time of yellow-led
 				Red2_Status = 1; // red-led turn on
 			}
 			Yellow2_count--;
 		}
+
 		HAL_Delay(1000);
 	}
 	/* USER CODE END 3 */
