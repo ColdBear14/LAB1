@@ -37,13 +37,13 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  0001562c  00000000  00000000  00024718  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00004a5a  00000000  00000000  00039d44  2**0
+ 17 .debug_line   00004a5e  00000000  00000000  00039d44  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079bcb  00000000  00000000  0003e79e  2**0
+ 18 .debug_str    00079bcb  00000000  00000000  0003e7a2  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b8369  2**0
+ 19 .comment      00000053  00000000  00000000  000b836d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d78  00000000  00000000  000b83bc  2**2
+ 20 .debug_frame  00000d78  00000000  00000000  000b83c0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -521,44 +521,47 @@ int main(void) {
 	/* Infinite loop */
 	/* USER CODE BEGIN WHILE */
 
-	int Yellow1_count = 2;
- 8000456:	2302      	movs	r3, #2
- 8000458:	62fb      	str	r3, [r7, #44]	; 0x2c
-	int Red1_count = 4;
- 800045a:	2304      	movs	r3, #4
- 800045c:	62bb      	str	r3, [r7, #40]	; 0x28
 	int Green1_count = 3;
- 800045e:	2303      	movs	r3, #3
+ 8000456:	2303      	movs	r3, #3
+ 8000458:	62fb      	str	r3, [r7, #44]	; 0x2c
+	int Yellow1_count = 2;
+ 800045a:	2302      	movs	r3, #2
+ 800045c:	62bb      	str	r3, [r7, #40]	; 0x28
+	int Red1_count = 4;
+ 800045e:	2304      	movs	r3, #4
  8000460:	627b      	str	r3, [r7, #36]	; 0x24
 
-	int Yellow1_Status = 0;
- 8000462:	2300      	movs	r3, #0
+
+	int Green1_Status = 1;
+ 8000462:	2301      	movs	r3, #1
  8000464:	623b      	str	r3, [r7, #32]
-	int Red1_Status = 0;
+	int Yellow1_Status = 0;
  8000466:	2300      	movs	r3, #0
  8000468:	61fb      	str	r3, [r7, #28]
-	int Green1_Status = 1;
- 800046a:	2301      	movs	r3, #1
+	int Red1_Status = 0;
+ 800046a:	2300      	movs	r3, #0
  800046c:	61bb      	str	r3, [r7, #24]
 
-	int Yellow2_count = 1;
- 800046e:	2301      	movs	r3, #1
- 8000470:	617b      	str	r3, [r7, #20]
-	int Red2_count = 5;
- 8000472:	2305      	movs	r3, #5
- 8000474:	613b      	str	r3, [r7, #16]
+
 	int Green2_count = 3;
- 8000476:	2303      	movs	r3, #3
+ 800046e:	2303      	movs	r3, #3
+ 8000470:	617b      	str	r3, [r7, #20]
+	int Yellow2_count = 1;
+ 8000472:	2301      	movs	r3, #1
+ 8000474:	613b      	str	r3, [r7, #16]
+	int Red2_count = 5;
+ 8000476:	2305      	movs	r3, #5
  8000478:	60fb      	str	r3, [r7, #12]
 
-	int Yellow2_Status = 0;
+
+	int Green2_Status = 0;
  800047a:	2300      	movs	r3, #0
  800047c:	60bb      	str	r3, [r7, #8]
-	int Red2_Status = 1;
- 800047e:	2301      	movs	r3, #1
+	int Yellow2_Status = 0;
+ 800047e:	2300      	movs	r3, #0
  8000480:	607b      	str	r3, [r7, #4]
-	int Green2_Status = 0;
- 8000482:	2300      	movs	r3, #0
+	int Red2_Status = 1;
+ 8000482:	2301      	movs	r3, #1
  8000484:	603b      	str	r3, [r7, #0]
 	while (1) {
 		/* USER CODE END WHILE */
@@ -566,239 +569,239 @@ int main(void) {
 		/* USER CODE BEGIN 3 */
 		// group 1 green led first
 		if (Green1_Status == 1) {
- 8000486:	69bb      	ldr	r3, [r7, #24]
+ 8000486:	6a3b      	ldr	r3, [r7, #32]
  8000488:	2b01      	cmp	r3, #1
- 800048a:	d11d      	bne.n	80004c8 <main+0x84>
+ 800048a:	d118      	bne.n	80004be <main+0x7a>
 			display7SEG_groupA(Green1_count);
- 800048c:	6a78      	ldr	r0, [r7, #36]	; 0x24
+ 800048c:	6af8      	ldr	r0, [r7, #44]	; 0x2c
  800048e:	f7ff fe5d 	bl	800014c <display7SEG_groupA>
 			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
  8000492:	2201      	movs	r2, #1
  8000494:	2180      	movs	r1, #128	; 0x80
  8000496:	4857      	ldr	r0, [pc, #348]	; (80005f4 <main+0x1b0>)
  8000498:	f000 fcb0 	bl	8000dfc <HAL_GPIO_WritePin>
-			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
- 800049c:	2200      	movs	r2, #0
- 800049e:	2120      	movs	r1, #32
- 80004a0:	4854      	ldr	r0, [pc, #336]	; (80005f4 <main+0x1b0>)
- 80004a2:	f000 fcab 	bl	8000dfc <HAL_GPIO_WritePin>
 
 			if (Green1_count == 0) {
- 80004a6:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 80004a8:	2b00      	cmp	r3, #0
- 80004aa:	d10a      	bne.n	80004c2 <main+0x7e>
+ 800049c:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 800049e:	2b00      	cmp	r3, #0
+ 80004a0:	d10a      	bne.n	80004b8 <main+0x74>
 				Green1_Status = 0; // green-led turn off
- 80004ac:	2300      	movs	r3, #0
- 80004ae:	61bb      	str	r3, [r7, #24]
+ 80004a2:	2300      	movs	r3, #0
+ 80004a4:	623b      	str	r3, [r7, #32]
+				HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+ 80004a6:	2200      	movs	r2, #0
+ 80004a8:	2180      	movs	r1, #128	; 0x80
+ 80004aa:	4852      	ldr	r0, [pc, #328]	; (80005f4 <main+0x1b0>)
+ 80004ac:	f000 fca6 	bl	8000dfc <HAL_GPIO_WritePin>
 				Green1_count = 4; // update time of green-led
  80004b0:	2304      	movs	r3, #4
- 80004b2:	627b      	str	r3, [r7, #36]	; 0x24
-				HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
- 80004b4:	2200      	movs	r2, #0
- 80004b6:	2180      	movs	r1, #128	; 0x80
- 80004b8:	484e      	ldr	r0, [pc, #312]	; (80005f4 <main+0x1b0>)
- 80004ba:	f000 fc9f 	bl	8000dfc <HAL_GPIO_WritePin>
+ 80004b2:	62fb      	str	r3, [r7, #44]	; 0x2c
 				Yellow1_Status = 1; //yellow-led turn on
- 80004be:	2301      	movs	r3, #1
- 80004c0:	623b      	str	r3, [r7, #32]
+ 80004b4:	2301      	movs	r3, #1
+ 80004b6:	61fb      	str	r3, [r7, #28]
 			}
 			Green1_count--;
- 80004c2:	6a7b      	ldr	r3, [r7, #36]	; 0x24
- 80004c4:	3b01      	subs	r3, #1
- 80004c6:	627b      	str	r3, [r7, #36]	; 0x24
+ 80004b8:	6afb      	ldr	r3, [r7, #44]	; 0x2c
+ 80004ba:	3b01      	subs	r3, #1
+ 80004bc:	62fb      	str	r3, [r7, #44]	; 0x2c
 
 		}
 
 		// yellow-led will turn on in 2 seconds until yellow-status=0
 		if (Yellow1_Status == 1) {
- 80004c8:	6a3b      	ldr	r3, [r7, #32]
- 80004ca:	2b01      	cmp	r3, #1
- 80004cc:	d118      	bne.n	8000500 <main+0xbc>
+ 80004be:	69fb      	ldr	r3, [r7, #28]
+ 80004c0:	2b01      	cmp	r3, #1
+ 80004c2:	d118      	bne.n	80004f6 <main+0xb2>
 			display7SEG_groupA(Yellow1_count);
- 80004ce:	6af8      	ldr	r0, [r7, #44]	; 0x2c
- 80004d0:	f7ff fe3c 	bl	800014c <display7SEG_groupA>
+ 80004c4:	6ab8      	ldr	r0, [r7, #40]	; 0x28
+ 80004c6:	f7ff fe41 	bl	800014c <display7SEG_groupA>
 			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
- 80004d4:	2201      	movs	r2, #1
- 80004d6:	2140      	movs	r1, #64	; 0x40
- 80004d8:	4846      	ldr	r0, [pc, #280]	; (80005f4 <main+0x1b0>)
- 80004da:	f000 fc8f 	bl	8000dfc <HAL_GPIO_WritePin>
+ 80004ca:	2201      	movs	r2, #1
+ 80004cc:	2140      	movs	r1, #64	; 0x40
+ 80004ce:	4849      	ldr	r0, [pc, #292]	; (80005f4 <main+0x1b0>)
+ 80004d0:	f000 fc94 	bl	8000dfc <HAL_GPIO_WritePin>
 			if (Yellow1_count == 0) {
- 80004de:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 80004e0:	2b00      	cmp	r3, #0
- 80004e2:	d10a      	bne.n	80004fa <main+0xb6>
+ 80004d4:	6abb      	ldr	r3, [r7, #40]	; 0x28
+ 80004d6:	2b00      	cmp	r3, #0
+ 80004d8:	d10a      	bne.n	80004f0 <main+0xac>
 				Yellow1_Status = 0; // yellow-led turn off
- 80004e4:	2300      	movs	r3, #0
- 80004e6:	623b      	str	r3, [r7, #32]
+ 80004da:	2300      	movs	r3, #0
+ 80004dc:	61fb      	str	r3, [r7, #28]
+				HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+ 80004de:	2200      	movs	r2, #0
+ 80004e0:	2140      	movs	r1, #64	; 0x40
+ 80004e2:	4844      	ldr	r0, [pc, #272]	; (80005f4 <main+0x1b0>)
+ 80004e4:	f000 fc8a 	bl	8000dfc <HAL_GPIO_WritePin>
 				Yellow1_count = 3; // update time of yellow-led
  80004e8:	2303      	movs	r3, #3
- 80004ea:	62fb      	str	r3, [r7, #44]	; 0x2c
-				HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
- 80004ec:	2200      	movs	r2, #0
- 80004ee:	2140      	movs	r1, #64	; 0x40
- 80004f0:	4840      	ldr	r0, [pc, #256]	; (80005f4 <main+0x1b0>)
- 80004f2:	f000 fc83 	bl	8000dfc <HAL_GPIO_WritePin>
+ 80004ea:	62bb      	str	r3, [r7, #40]	; 0x28
 				Red1_Status = 1; // red-led turn on
- 80004f6:	2301      	movs	r3, #1
- 80004f8:	61fb      	str	r3, [r7, #28]
+ 80004ec:	2301      	movs	r3, #1
+ 80004ee:	61bb      	str	r3, [r7, #24]
 			}
 			Yellow1_count--;
- 80004fa:	6afb      	ldr	r3, [r7, #44]	; 0x2c
- 80004fc:	3b01      	subs	r3, #1
- 80004fe:	62fb      	str	r3, [r7, #44]	; 0x2c
+ 80004f0:	6abb      	ldr	r3, [r7, #40]	; 0x28
+ 80004f2:	3b01      	subs	r3, #1
+ 80004f4:	62bb      	str	r3, [r7, #40]	; 0x28
 		}
 
 		// red-led will turn on in 5 seconds until red-status=0
 		if (Red1_Status == 1) {
- 8000500:	69fb      	ldr	r3, [r7, #28]
- 8000502:	2b01      	cmp	r3, #1
- 8000504:	d115      	bne.n	8000532 <main+0xee>
+ 80004f6:	69bb      	ldr	r3, [r7, #24]
+ 80004f8:	2b01      	cmp	r3, #1
+ 80004fa:	d11a      	bne.n	8000532 <main+0xee>
 			display7SEG_groupA(Red1_count + 1);
- 8000506:	6abb      	ldr	r3, [r7, #40]	; 0x28
- 8000508:	3301      	adds	r3, #1
- 800050a:	4618      	mov	r0, r3
- 800050c:	f7ff fe1e 	bl	800014c <display7SEG_groupA>
+ 80004fc:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 80004fe:	3301      	adds	r3, #1
+ 8000500:	4618      	mov	r0, r3
+ 8000502:	f7ff fe23 	bl	800014c <display7SEG_groupA>
 			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
- 8000510:	2201      	movs	r2, #1
- 8000512:	2120      	movs	r1, #32
- 8000514:	4837      	ldr	r0, [pc, #220]	; (80005f4 <main+0x1b0>)
- 8000516:	f000 fc71 	bl	8000dfc <HAL_GPIO_WritePin>
+ 8000506:	2201      	movs	r2, #1
+ 8000508:	2120      	movs	r1, #32
+ 800050a:	483a      	ldr	r0, [pc, #232]	; (80005f4 <main+0x1b0>)
+ 800050c:	f000 fc76 	bl	8000dfc <HAL_GPIO_WritePin>
 
 			if (Red1_count == 0) {
- 800051a:	6abb      	ldr	r3, [r7, #40]	; 0x28
- 800051c:	2b00      	cmp	r3, #0
- 800051e:	d105      	bne.n	800052c <main+0xe8>
+ 8000510:	6a7b      	ldr	r3, [r7, #36]	; 0x24
+ 8000512:	2b00      	cmp	r3, #0
+ 8000514:	d10a      	bne.n	800052c <main+0xe8>
 				Red1_Status = 0; // red-led turn off
- 8000520:	2300      	movs	r3, #0
- 8000522:	61fb      	str	r3, [r7, #28]
+ 8000516:	2300      	movs	r3, #0
+ 8000518:	61bb      	str	r3, [r7, #24]
+				HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
+ 800051a:	2200      	movs	r2, #0
+ 800051c:	2120      	movs	r1, #32
+ 800051e:	4835      	ldr	r0, [pc, #212]	; (80005f4 <main+0x1b0>)
+ 8000520:	f000 fc6c 	bl	8000dfc <HAL_GPIO_WritePin>
 				Red1_count = 5; // update time of red-led
  8000524:	2305      	movs	r3, #5
- 8000526:	62bb      	str	r3, [r7, #40]	; 0x28
+ 8000526:	627b      	str	r3, [r7, #36]	; 0x24
 				Green1_Status = 1; // green-led turn on
  8000528:	2301      	movs	r3, #1
- 800052a:	61bb      	str	r3, [r7, #24]
+ 800052a:	623b      	str	r3, [r7, #32]
 			}
 			Red1_count--;
- 800052c:	6abb      	ldr	r3, [r7, #40]	; 0x28
+ 800052c:	6a7b      	ldr	r3, [r7, #36]	; 0x24
  800052e:	3b01      	subs	r3, #1
- 8000530:	62bb      	str	r3, [r7, #40]	; 0x28
+ 8000530:	627b      	str	r3, [r7, #36]	; 0x24
 		}
 		// group 2 Red led first
 		if (Red2_Status == 1) {
- 8000532:	687b      	ldr	r3, [r7, #4]
+ 8000532:	683b      	ldr	r3, [r7, #0]
  8000534:	2b01      	cmp	r3, #1
- 8000536:	d120      	bne.n	800057a <main+0x136>
+ 8000536:	d11a      	bne.n	800056e <main+0x12a>
 			display7SEG_groupB(Red2_count);
- 8000538:	6938      	ldr	r0, [r7, #16]
+ 8000538:	68f8      	ldr	r0, [r7, #12]
  800053a:	f7ff feb9 	bl	80002b0 <display7SEG_groupB>
 			HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, SET);
  800053e:	2201      	movs	r2, #1
  8000540:	f44f 7180 	mov.w	r1, #256	; 0x100
  8000544:	482b      	ldr	r0, [pc, #172]	; (80005f4 <main+0x1b0>)
  8000546:	f000 fc59 	bl	8000dfc <HAL_GPIO_WritePin>
-			HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, RESET);
- 800054a:	2200      	movs	r2, #0
- 800054c:	f44f 7100 	mov.w	r1, #512	; 0x200
- 8000550:	4828      	ldr	r0, [pc, #160]	; (80005f4 <main+0x1b0>)
- 8000552:	f000 fc53 	bl	8000dfc <HAL_GPIO_WritePin>
 
 			if (Red2_count == 0) {
- 8000556:	693b      	ldr	r3, [r7, #16]
- 8000558:	2b00      	cmp	r3, #0
- 800055a:	d10b      	bne.n	8000574 <main+0x130>
+ 800054a:	68fb      	ldr	r3, [r7, #12]
+ 800054c:	2b00      	cmp	r3, #0
+ 800054e:	d10b      	bne.n	8000568 <main+0x124>
 				Red2_Status = 0; // red-led turn off
- 800055c:	2300      	movs	r3, #0
- 800055e:	607b      	str	r3, [r7, #4]
+ 8000550:	2300      	movs	r3, #0
+ 8000552:	603b      	str	r3, [r7, #0]
 				Red2_count = 6; // update time of red-led
- 8000560:	2306      	movs	r3, #6
- 8000562:	613b      	str	r3, [r7, #16]
+ 8000554:	2306      	movs	r3, #6
+ 8000556:	60fb      	str	r3, [r7, #12]
 				HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, RESET);
- 8000564:	2200      	movs	r2, #0
- 8000566:	f44f 7180 	mov.w	r1, #256	; 0x100
- 800056a:	4822      	ldr	r0, [pc, #136]	; (80005f4 <main+0x1b0>)
- 800056c:	f000 fc46 	bl	8000dfc <HAL_GPIO_WritePin>
+ 8000558:	2200      	movs	r2, #0
+ 800055a:	f44f 7180 	mov.w	r1, #256	; 0x100
+ 800055e:	4825      	ldr	r0, [pc, #148]	; (80005f4 <main+0x1b0>)
+ 8000560:	f000 fc4c 	bl	8000dfc <HAL_GPIO_WritePin>
 				Green2_Status = 1; // green-led turn on
- 8000570:	2301      	movs	r3, #1
- 8000572:	603b      	str	r3, [r7, #0]
+ 8000564:	2301      	movs	r3, #1
+ 8000566:	60bb      	str	r3, [r7, #8]
 			}
 			Red2_count--;
- 8000574:	693b      	ldr	r3, [r7, #16]
- 8000576:	3b01      	subs	r3, #1
- 8000578:	613b      	str	r3, [r7, #16]
+ 8000568:	68fb      	ldr	r3, [r7, #12]
+ 800056a:	3b01      	subs	r3, #1
+ 800056c:	60fb      	str	r3, [r7, #12]
 		}
 
 		//green-led will turn on in 3 seconds until green-status=0
 		if (Green2_Status == 1) {
- 800057a:	683b      	ldr	r3, [r7, #0]
- 800057c:	2b01      	cmp	r3, #1
- 800057e:	d11a      	bne.n	80005b6 <main+0x172>
+ 800056e:	68bb      	ldr	r3, [r7, #8]
+ 8000570:	2b01      	cmp	r3, #1
+ 8000572:	d11a      	bne.n	80005aa <main+0x166>
 			display7SEG_groupB(Green2_count);
- 8000580:	68f8      	ldr	r0, [r7, #12]
- 8000582:	f7ff fe95 	bl	80002b0 <display7SEG_groupB>
+ 8000574:	6978      	ldr	r0, [r7, #20]
+ 8000576:	f7ff fe9b 	bl	80002b0 <display7SEG_groupB>
 			HAL_GPIO_WritePin(GREEN2_GPIO_Port, GREEN2_Pin, SET);
- 8000586:	2201      	movs	r2, #1
- 8000588:	f44f 6180 	mov.w	r1, #1024	; 0x400
- 800058c:	4819      	ldr	r0, [pc, #100]	; (80005f4 <main+0x1b0>)
- 800058e:	f000 fc35 	bl	8000dfc <HAL_GPIO_WritePin>
+ 800057a:	2201      	movs	r2, #1
+ 800057c:	f44f 6180 	mov.w	r1, #1024	; 0x400
+ 8000580:	481c      	ldr	r0, [pc, #112]	; (80005f4 <main+0x1b0>)
+ 8000582:	f000 fc3b 	bl	8000dfc <HAL_GPIO_WritePin>
 
 			if (Green2_count == 0) {
- 8000592:	68fb      	ldr	r3, [r7, #12]
- 8000594:	2b00      	cmp	r3, #0
- 8000596:	d10b      	bne.n	80005b0 <main+0x16c>
+ 8000586:	697b      	ldr	r3, [r7, #20]
+ 8000588:	2b00      	cmp	r3, #0
+ 800058a:	d10b      	bne.n	80005a4 <main+0x160>
 				Green2_Status = 0; // green-led turn off
- 8000598:	2300      	movs	r3, #0
- 800059a:	603b      	str	r3, [r7, #0]
+ 800058c:	2300      	movs	r3, #0
+ 800058e:	60bb      	str	r3, [r7, #8]
 				Green2_count = 4; // update time of green-led
- 800059c:	2304      	movs	r3, #4
- 800059e:	60fb      	str	r3, [r7, #12]
+ 8000590:	2304      	movs	r3, #4
+ 8000592:	617b      	str	r3, [r7, #20]
 				HAL_GPIO_WritePin(GREEN2_GPIO_Port, GREEN2_Pin, RESET);
- 80005a0:	2200      	movs	r2, #0
- 80005a2:	f44f 6180 	mov.w	r1, #1024	; 0x400
- 80005a6:	4813      	ldr	r0, [pc, #76]	; (80005f4 <main+0x1b0>)
- 80005a8:	f000 fc28 	bl	8000dfc <HAL_GPIO_WritePin>
+ 8000594:	2200      	movs	r2, #0
+ 8000596:	f44f 6180 	mov.w	r1, #1024	; 0x400
+ 800059a:	4816      	ldr	r0, [pc, #88]	; (80005f4 <main+0x1b0>)
+ 800059c:	f000 fc2e 	bl	8000dfc <HAL_GPIO_WritePin>
 				Yellow2_Status = 1; //yellow-led turn on
- 80005ac:	2301      	movs	r3, #1
- 80005ae:	60bb      	str	r3, [r7, #8]
+ 80005a0:	2301      	movs	r3, #1
+ 80005a2:	607b      	str	r3, [r7, #4]
 			}
 			Green2_count--;
- 80005b0:	68fb      	ldr	r3, [r7, #12]
- 80005b2:	3b01      	subs	r3, #1
- 80005b4:	60fb      	str	r3, [r7, #12]
+ 80005a4:	697b      	ldr	r3, [r7, #20]
+ 80005a6:	3b01      	subs	r3, #1
+ 80005a8:	617b      	str	r3, [r7, #20]
 		}
 
 		//yellow-led will turn on in 3 seconds until yellow-status=0
 		if (Yellow2_Status == 1) {
- 80005b6:	68bb      	ldr	r3, [r7, #8]
- 80005b8:	2b01      	cmp	r3, #1
- 80005ba:	d116      	bne.n	80005ea <main+0x1a6>
+ 80005aa:	687b      	ldr	r3, [r7, #4]
+ 80005ac:	2b01      	cmp	r3, #1
+ 80005ae:	d11c      	bne.n	80005ea <main+0x1a6>
 			display7SEG_groupB(Yellow2_count + 1);
- 80005bc:	697b      	ldr	r3, [r7, #20]
- 80005be:	3301      	adds	r3, #1
- 80005c0:	4618      	mov	r0, r3
- 80005c2:	f7ff fe75 	bl	80002b0 <display7SEG_groupB>
+ 80005b0:	693b      	ldr	r3, [r7, #16]
+ 80005b2:	3301      	adds	r3, #1
+ 80005b4:	4618      	mov	r0, r3
+ 80005b6:	f7ff fe7b 	bl	80002b0 <display7SEG_groupB>
 			HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, SET);
- 80005c6:	2201      	movs	r2, #1
- 80005c8:	f44f 7100 	mov.w	r1, #512	; 0x200
- 80005cc:	4809      	ldr	r0, [pc, #36]	; (80005f4 <main+0x1b0>)
- 80005ce:	f000 fc15 	bl	8000dfc <HAL_GPIO_WritePin>
+ 80005ba:	2201      	movs	r2, #1
+ 80005bc:	f44f 7100 	mov.w	r1, #512	; 0x200
+ 80005c0:	480c      	ldr	r0, [pc, #48]	; (80005f4 <main+0x1b0>)
+ 80005c2:	f000 fc1b 	bl	8000dfc <HAL_GPIO_WritePin>
 
 			if (Yellow2_count == 0) {
- 80005d2:	697b      	ldr	r3, [r7, #20]
- 80005d4:	2b00      	cmp	r3, #0
- 80005d6:	d105      	bne.n	80005e4 <main+0x1a0>
+ 80005c6:	693b      	ldr	r3, [r7, #16]
+ 80005c8:	2b00      	cmp	r3, #0
+ 80005ca:	d10b      	bne.n	80005e4 <main+0x1a0>
 				Yellow2_Status = 0; // yellow-led turn off
- 80005d8:	2300      	movs	r3, #0
- 80005da:	60bb      	str	r3, [r7, #8]
+ 80005cc:	2300      	movs	r3, #0
+ 80005ce:	607b      	str	r3, [r7, #4]
+				HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, RESET);
+ 80005d0:	2200      	movs	r2, #0
+ 80005d2:	f44f 7100 	mov.w	r1, #512	; 0x200
+ 80005d6:	4807      	ldr	r0, [pc, #28]	; (80005f4 <main+0x1b0>)
+ 80005d8:	f000 fc10 	bl	8000dfc <HAL_GPIO_WritePin>
 				Yellow2_count = 2; // update time of yellow-led
  80005dc:	2302      	movs	r3, #2
- 80005de:	617b      	str	r3, [r7, #20]
+ 80005de:	613b      	str	r3, [r7, #16]
 				Red2_Status = 1; // red-led turn on
  80005e0:	2301      	movs	r3, #1
- 80005e2:	607b      	str	r3, [r7, #4]
+ 80005e2:	603b      	str	r3, [r7, #0]
 			}
 			Yellow2_count--;
- 80005e4:	697b      	ldr	r3, [r7, #20]
+ 80005e4:	693b      	ldr	r3, [r7, #16]
  80005e6:	3b01      	subs	r3, #1
- 80005e8:	617b      	str	r3, [r7, #20]
+ 80005e8:	613b      	str	r3, [r7, #16]
 		}
 		HAL_Delay(1000);
  80005ea:	f44f 707a 	mov.w	r0, #1000	; 0x3e8

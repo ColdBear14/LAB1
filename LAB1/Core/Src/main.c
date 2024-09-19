@@ -222,12 +222,11 @@ int main(void) {
 		if (Green1_Status == 1) {
 			display7SEG_groupA(Green1_count);
 			HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, SET);
-			HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
 
 			if (Green1_count == 0) {
 				Green1_Status = 0; // green-led turn off
-				Green1_count = 4; // update time of green-led
 				HAL_GPIO_WritePin(LED_GREEN_GPIO_Port, LED_GREEN_Pin, RESET);
+				Green1_count = 4; // update time of green-led
 				Yellow1_Status = 1; //yellow-led turn on
 			}
 			Green1_count--;
@@ -240,8 +239,8 @@ int main(void) {
 			HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, SET);
 			if (Yellow1_count == 0) {
 				Yellow1_Status = 0; // yellow-led turn off
-				Yellow1_count = 3; // update time of yellow-led
 				HAL_GPIO_WritePin(LED_YELLOW_GPIO_Port, LED_YELLOW_Pin, RESET);
+				Yellow1_count = 3; // update time of yellow-led
 				Red1_Status = 1; // red-led turn on
 			}
 			Yellow1_count--;
@@ -254,6 +253,7 @@ int main(void) {
 
 			if (Red1_count == 0) {
 				Red1_Status = 0; // red-led turn off
+				HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, RESET);
 				Red1_count = 5; // update time of red-led
 				Green1_Status = 1; // green-led turn on
 			}
@@ -263,7 +263,6 @@ int main(void) {
 		if (Red2_Status == 1) {
 			display7SEG_groupB(Red2_count);
 			HAL_GPIO_WritePin(RED2_GPIO_Port, RED2_Pin, SET);
-			HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, RESET);
 
 			if (Red2_count == 0) {
 				Red2_Status = 0; // red-led turn off
@@ -295,6 +294,7 @@ int main(void) {
 
 			if (Yellow2_count == 0) {
 				Yellow2_Status = 0; // yellow-led turn off
+				HAL_GPIO_WritePin(YELLOW2_GPIO_Port, YELLOW2_Pin, RESET);
 				Yellow2_count = 2; // update time of yellow-led
 				Red2_Status = 1; // red-led turn on
 			}
